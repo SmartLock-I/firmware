@@ -1,0 +1,6 @@
+build
+*.json
+*.cache
+.*project
+.DS_Store
+openocd.cfg
