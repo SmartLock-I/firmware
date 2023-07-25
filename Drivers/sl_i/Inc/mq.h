@@ -1,8 +1,9 @@
 #ifndef __MQ__
 #define __MQ__
 
-#include <bsp.h>
+#include <sli.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 typedef struct {
   uint32_t n, head, tail;
