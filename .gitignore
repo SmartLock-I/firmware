@@ -1,6 +1,9 @@
 build
+build_*
 *.json
 *.cache
 .*project
 .DS_Store
 openocd.cfg
+cmake-build-*
+
