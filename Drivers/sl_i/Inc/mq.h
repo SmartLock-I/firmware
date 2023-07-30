@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 typedef struct {
-  uint32_t n, head, tail;
+  uint32_t n, size, head, tail;
   uint32_t* msg;
 } mq_t;
 
@@ -22,4 +22,3 @@ sli_err mq_clear(mq_t* mq);
 #ifdef __cplusplus
 }
 #endif
-
