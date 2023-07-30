@@ -76,7 +76,7 @@ TEST(MQ, SEND_2) {
   EXPECT_EQ(SLI_OK, err);
   EXPECT_EQ(1234, msg[0]);
   EXPECT_EQ(0, mq.head);
-  EXPECT_EQ(1, mq.tail);
+  EXPECT_EQ(0, mq.tail);
 }
 
 TEST(MQ, SEND_3) {
@@ -105,7 +105,7 @@ TEST(MQ, SEND_4) {
     EXPECT_EQ(SLI_OK, err);
   }
   EXPECT_EQ(0, mq.head);
-  EXPECT_EQ(space, mq.tail);
+  EXPECT_EQ(0, mq.tail);
 }
 
 TEST(MQ, SEND_5) {
@@ -120,7 +120,7 @@ TEST(MQ, SEND_5) {
     EXPECT_EQ(SLI_OK, err);
   }
   EXPECT_EQ(0, mq.head);
-  EXPECT_EQ(space, mq.tail);
+  EXPECT_EQ(0, mq.tail);
 }
 
 TEST(MQ, SEND_6) {
@@ -239,6 +239,24 @@ TEST(MQ, SEND_RECV_2) {
   sli_err err;
 
   for (uint32_t i = 0; i < space * 5; ++i) {
+    err = mq_send(&mq, i);
+    EXPECT_EQ(SLI_OK, err);
+
+    uint32_t recv = 0;
+    err = mq_receive(&mq, &recv);
+    EXPECT_EQ(SLI_OK, err);
+    EXPECT_EQ(i, recv);
+  }
+}
+
+TEST(MQ, SEND_RECV_3) {
+  mq_t mq;
+  const uint32_t space = 1;
+  uint32_t msg[space];
+  mq_create(&mq, msg, space);
+  sli_err err;
+
+  for (uint32_t i = 0; i < 100; ++i) {
     err = mq_send(&mq, i);
     EXPECT_EQ(SLI_OK, err);
 
